@@ -87,7 +87,6 @@ services:
       traefik.http.routers.portainer-frontend.tls.certresolver: resolver
       traefik.http.routers.portainer-frontend.tls.domains[0].main: $DOMAIN
       traefik.http.routers.portainer-frontend.tls.domains[0].sans: "*.${DOMAIN}"
-      traefik.http.routers.portainer-frontend.middlewares: basic-auth-global
       # Edge
       traefik.http.services.portainer-edge.loadbalancer.server.port: 8000
       traefik.http.routers.portainer-edge.rule: Host(`edge.${DOMAIN}`)
