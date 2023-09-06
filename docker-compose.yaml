@@ -122,6 +122,7 @@ services:
     image: grafana/grafana
     container_name: grafana
     restart: unless-stopped
+    user: root
     # user: "472"
     environment:
       DS_PROMETHEUS: prometheus
@@ -141,18 +142,19 @@ services:
     image: prom/prometheus
     container_name: prometheus
     restart: unless-stopped
+    user: root
     volumes:
       - ./prometheus/data:/prometheus
       - ./prometheus/config:/etc/prometheus
     networks:
       - monitor
     command:
-      - "--config.file=/etc/prometheus/prometheus.yml"
-      - "--web.enable-admin-api"
-      - "--web.enable-lifecycle"
-      - "--storage.tsdb.path=/prometheus"
-      - "--web.console.libraries=/etc/prometheus/console_libraries"
-      - "--web.console.templates=/etc/prometheus/consoles"
+     - "--config.file=/etc/prometheus/prometheus.yml"
+     - "--web.enable-admin-api"
+     - "--web.enable-lifecycle"
+     - "--storage.tsdb.path=/prometheus"
+     - "--web.console.libraries=/etc/prometheus/console_libraries"
+     - "--web.console.templates=/etc/prometheus/consoles"
 
   node-exporter:
     image: prom/node-exporter:latest
@@ -176,4 +178,4 @@ services:
     networks:
       - monitor
     restart: unless-stopped
-    command: 'v2ray-exporter --v2ray-endpoint "xray:10085" --listen ":9550"'
+    command: 'v2ray-exporter --v2ray-endpoint "xray:10085" --listen ":9550"'    
